@@ -1,26 +1,53 @@
 import { Injectable } from '@nestjs/common';
 import { CreateNotificationDto } from './dto/create-notification.dto';
 import { UpdateNotificationDto } from './dto/update-notification.dto';
+import { NotificationStatus } from '@prisma/client';
+import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class NotificationsService {
-  create(createNotificationDto: CreateNotificationDto) {
-    return 'This action adds a new notification';
+  constructor(private prisma: PrismaService) {}
+
+  async create(createNotificationDto: CreateNotificationDto) {
+    return this.prisma.notification.create({
+      data: createNotificationDto,
+    });
   }
 
-  findAll() {
-    return `This action returns all notifications`;
+  async findAll() {
+    return this.prisma.notification.findMany({
+      include: {
+        user: { select: { username: true, email: true } },
+      },
+    });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} notification`;
+  async findOne(id: string) {
+    return this.prisma.notification.findUnique({
+      where: { id },
+      include: {
+        user: { select: { username: true, email: true } },
+      },
+    });
   }
 
-  update(id: number, updateNotificationDto: UpdateNotificationDto) {
-    return `This action updates a #${id} notification`;
+  async update(id: string, updateNotificationDto: UpdateNotificationDto) {
+    return this.prisma.notification.update({
+      where: { id },
+      data: updateNotificationDto,
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} notification`;
+  async remove(id: string) {
+    return this.prisma.notification.delete({
+      where: { id },
+    });
+  }
+
+  async markAsRead(id: string) {
+    return this.prisma.notification.update({
+      where: { id },
+      data: { status: NotificationStatus.READ },
+    });
   }
 }

@@ -14,7 +14,7 @@ datasource db {
 }
 model User {
   id        String   @id @default(uuid())
-  name      String
+  username      String
   email     String   @unique
   password  String
   role      UserRole @default(TRAVELER) // TRAVELER, OPERATOR, ADMIN
@@ -32,7 +32,7 @@ model User {
 enum UserRole {
   TRAVELER
   OPERATOR
-  ADMIN
+  ADMIN                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
 }
 
 model Tour {
@@ -42,8 +42,8 @@ model Tour {
   location    String
   price       Float
   images      String[] // Store image URLs
-  ownerId     String
-  owner       User     @relation("TourOwner", fields: [ownerId], references: [id])
+  userId     String
+  User       User     @relation("TourOwner", fields: [userId], references: [id])
   createdAt   DateTime @default(now())
 
   bookings    Booking[]
@@ -106,10 +106,13 @@ model Notification {
   type      NotificationType
   read      Boolean @default(false)
   createdAt DateTime @default(now())
-
+status NotificationStatus @default(UNREAD)
   user      User  @relation(fields: [userId], references: [id])
 }
-
+enum NotificationStatus {
+  UNREAD
+  READ
+}
 enum NotificationType {
   BOOKING_CONFIRMATION
   PAYMENT_SUCCESS

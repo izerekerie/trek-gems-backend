@@ -1,26 +1,54 @@
 import { Injectable } from '@nestjs/common';
+import { PrismaService } from '../prisma/prisma.service';
 import { CreateTourDto } from './dto/create-tour.dto';
 import { UpdateTourDto } from './dto/update-tour.dto';
 
 @Injectable()
 export class ToursService {
-  create(createTourDto: CreateTourDto) {
-    return 'This action adds a new tour';
+  constructor(private readonly prisma: PrismaService) {}
+
+  async findAll() {
+    return await this.prisma.tour.findMany({
+      include: {
+        User: { select: { username: true, email: true } },
+        bookings: true,
+        reviews: true,
+      },
+    });
   }
 
-  findAll() {
-    return `This action returns all tours`;
+  async findById(id: string) {
+    return await this.prisma.tour.findUnique({
+      where: { id },
+      include: {
+        User: { select: { username: true, email: true } },
+        bookings: true,
+        reviews: true,
+      },
+    });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} tour`;
+  async create(data: CreateTourDto) {
+    return await this.prisma.tour.create({
+      data: {
+        title: data.title,
+        description: data.description,
+        location: data.location,
+        price: data.price,
+        images: data.images,
+        userId: data.userId,
+      },
+    });
   }
 
-  update(id: number, updateTourDto: UpdateTourDto) {
-    return `This action updates a #${id} tour`;
+  async update(id: string, data: UpdateTourDto) {
+    return await this.prisma.tour.update({
+      where: { id },
+      data,
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} tour`;
+  async delete(id: string) {
+    return await this.prisma.tour.delete({ where: { id } });
   }
 }
