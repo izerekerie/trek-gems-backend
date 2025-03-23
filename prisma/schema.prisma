@@ -27,6 +27,7 @@ model User {
   reviews   Review[]
 
   Notification Notification[]
+  refreshToken String?
 }
 
 enum UserRole {

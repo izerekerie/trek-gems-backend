@@ -7,9 +7,10 @@ import { BookingsModule } from './bookings/bookings.module';
 import { PaymentsModule } from './payments/payments.module';
 import { ReviewsModule } from './reviews/reviews.module';
 import { NotificationsModule } from './notifications/notifications.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
-  imports: [UsersModule, ToursModule, BookingsModule, PaymentsModule, ReviewsModule, NotificationsModule],
+  imports: [UsersModule, ToursModule, BookingsModule, PaymentsModule, ReviewsModule, NotificationsModule, AuthModule],
   controllers: [AppController],
   providers: [AppService],
 })
