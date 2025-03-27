@@ -44,14 +44,19 @@ export class AuthController {
 
   @Post('/login')
   async login(@Body() loginDto: LoginDto, @Res() res: Response) {
-    const tokens = await this.authService.login(
+    const { user, tokens } = await this.authService.login(
       loginDto.email,
       loginDto.password,
     );
 
     return res.json({
+      user: {
+        id: user.id,
+        username: user.username,
+        email: user.email,
+        role: user.role,
+      },
       access_token: tokens.access_token,
-      refresh_token: tokens.refresh_token,
     });
   }
 
@@ -63,7 +68,6 @@ export class AuthController {
     @Req() req: Request,
   ) {
     const user = req?.user;
-    console.log('user', user);
     return this.authService.refreshTokens(req?.user.id);
   }
 }

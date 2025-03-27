@@ -16,6 +16,7 @@ export class UsersService {
         username: data.username,
         email: data.email,
         password: hashedPassword,
+        phoneNumber: data.phoneNumber,
         role: data.role as UserRole,
       },
     });

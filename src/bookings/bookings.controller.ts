@@ -29,6 +29,14 @@ export class BookingsController {
   findOne(@Param('id') id: string) {
     return this.bookingsService.findOne(id);
   }
+  @Get('user/:userId')
+  async getUserBookings(@Param('userId') userId: string) {
+    return this.bookingsService.getBookingsByUser(userId);
+  }
+  @Get('owner/:tourOwnerId')
+  async getTourOwnerBookings(@Param('tourOwnerId') tourOwnerId: string) {
+    return this.bookingsService.getBookingsByTourOwner(tourOwnerId);
+  }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateBookingDto: UpdateBookingDto) {

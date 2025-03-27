@@ -17,10 +17,10 @@ model User {
   username      String
   email     String   @unique
   password  String
+  phoneNumber String
   role      UserRole @default(TRAVELER) // TRAVELER, OPERATOR, ADMIN
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
   tours     Tour[]    @relation("TourOwner")
   bookings  Booking[]
   payments  Payment[]
@@ -57,7 +57,10 @@ model Booking {
   tourId     String
   status     BookingStatus @default(PENDING)
   createdAt  DateTime @default(now())
-
+  date  DateTime      // Date when the booking starts
+   numberOfPeople     Int
+  totalCost          Float
+  depositPaid        Float?
   user       User  @relation(fields: [userId], references: [id])
   tour       Tour  @relation(fields: [tourId], references: [id])
   payment    Payment?

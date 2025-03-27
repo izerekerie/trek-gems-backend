@@ -45,7 +45,7 @@ export class AuthService {
       user.role,
     );
 
-    return tokens;
+    return { user, tokens };
   }
 
   async refreshTokens(userId: string) {
@@ -75,13 +75,13 @@ export class AuthService {
 
     const access_token = this.jwtService.sign(payload, {
       secret: process.env.JWT_SECRET_KEY,
-      expiresIn: '2m', // Short expiry time for security
+      expiresIn: '1h', // Short expiry time for security
     });
 
     // Generate refresh token (longer-lived)
     const refresh_token = this.jwtService.sign(payload, {
       secret: process.env.JWT_REFRESH_SECRET,
-      expiresIn: '3m', // Refresh token lasts longer
+      expiresIn: '7d', // Refresh token lasts longer
     });
 
     const hashedToken = await bcrypt.hash(refresh_token, 10);

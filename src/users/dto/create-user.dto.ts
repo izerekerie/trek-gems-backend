@@ -19,7 +19,9 @@ export class CreateUserDto {
   @IsEmail()
   @IsNotEmpty()
   email: string;
-
+  @ApiProperty({ type: String, example: '+250791234567' })
+  @IsString()
+  phoneNumber: string;
   @ApiProperty({ example: 'securepassword123', type: String })
   @IsString()
   @IsNotEmpty()
