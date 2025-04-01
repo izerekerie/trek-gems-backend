@@ -25,7 +25,14 @@ export class ReviewsController {
   findAll() {
     return this.reviewService.findAll();
   }
-
+  @Get('user/:userId')
+  async findReviewsByUser(@Param('userId') userId: string) {
+    return this.reviewService.findAllByUser(userId);
+  }
+  @Get('tour/:tourOwnerId')
+  async findReviewByTou(@Param('tourOwnerId') tourOwnerId: string) {
+    return this.reviewService.findAllByTour(tourOwnerId);
+  }
   @Get(':id')
   @ApiParam({ name: 'id', type: String, example: 'review-1234-uuid' })
   findOne(@Param('id') id: string) {

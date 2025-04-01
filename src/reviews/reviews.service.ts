@@ -22,6 +22,24 @@ export class ReviewsService {
     });
   }
 
+  async findAllByUser(userId: string) {
+    return this.prisma.review.findMany({
+      where: { userId },
+      include: {
+        user: { select: { username: true, email: true } },
+        tour: { select: { title: true, location: true } },
+      },
+    });
+  }
+  async findAllByTour(tourId: string) {
+    return this.prisma.review.findMany({
+      where: { tourId: tourId },
+      include: {
+        user: { select: { username: true, email: true } },
+        tour: { select: { title: true, location: true } },
+      },
+    });
+  }
   async findOne(id: string) {
     return this.prisma.review.findUnique({
       where: { id },

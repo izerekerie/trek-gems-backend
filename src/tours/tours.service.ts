@@ -139,10 +139,24 @@ export class ToursService {
       include: {
         bookings: false,
         reviews: false,
+        _count: {
+          select: {
+            bookings: true,
+            reviews: true,
+          },
+        },
       },
     });
   }
-
+  async findBookingsById(tourId: string) {
+    return await this.prisma.booking.findMany({
+      where: { tourId },
+      include: {
+        user: { select: { id: true, username: true, email: true } },
+        tour: { select: { id: true, title: true, location: true } },
+      },
+    });
+  }
   async searchTours(query: string) {
     return this.prisma.tour.findMany({
       where: {

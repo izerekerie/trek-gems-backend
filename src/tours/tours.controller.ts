@@ -44,6 +44,10 @@ export class ToursController {
   findToursByUser(@Param('id') id: string) {
     return this.toursService.findToursByUser(id);
   }
+  @Get('bookings/:id')
+  findBookingsByTour(@Param('id') id: string) {
+    return this.toursService.findBookingsById(id);
+  }
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateTourDto: UpdateTourDto) {
     return this.toursService.update(id, updateTourDto);
