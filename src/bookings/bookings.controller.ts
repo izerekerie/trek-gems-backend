@@ -22,8 +22,8 @@ export class BookingsController {
   create(@Body() createBookingDto: CreateBookingDto) {
     return this.bookingsService.create(createBookingDto);
   }
-  @ApiBearerAuth()
-  @UseGuards(JwtAuthGuard)
+  // @ApiBearerAuth()
+  // @UseGuards(JwtAuthGuard)
   @Get()
   findAll() {
     return this.bookingsService.findAll();
@@ -46,8 +46,8 @@ export class BookingsController {
   async getTourOwnerBookings(@Param('tourOwnerId') tourOwnerId: string) {
     return this.bookingsService.getBookingsByTourOwner(tourOwnerId);
   }
-  @ApiBearerAuth()
-  @UseGuards(JwtAuthGuard)
+  // @ApiBearerAuth()
+  // @UseGuards(JwtAuthGuard)
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateBookingDto: UpdateBookingDto) {
     return this.bookingsService.update(id, updateBookingDto);

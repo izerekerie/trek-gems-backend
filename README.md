@@ -1,99 +1,234 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Tourism Booking System - Backend API
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+[![NestJS](https://img.shields.io/badge/NestJS-10.x-red?style=flat&logo=nestjs)](https://nestjs.com/)
+[![Prisma](https://img.shields.io/badge/Prisma-5.x-blue?style=flat&logo=prisma)](https://www.prisma.io/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue?style=flat&logo=typescript)](https://www.typescriptlang.org/)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+RESTful API for the Tourism Booking System built with NestJS and Prisma ORM, providing endpoints for managing tours, bookings, users, and more.
 
-## Description
+![Tourism Booking API](https://via.placeholder.com/800x400?text=Tourism+Booking+API)
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## ✨ Features
 
-## Project setup
+- 🔐 JWT authentication
+- 👤 User management
+- 🌍 Tours and destinations
+- 📅 Booking management
+- 💸 Payment processing
+- ⭐ Reviews and ratings
+- 📊 Analytics and reporting
+- 📝 Swagger API documentation
+- 🗄️ Prisma ORM for database operations
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js 16.x or higher
+- npm or yarn
+- Git
+- PostgreSQL/MySQL/MongoDB (depending on your chosen database)
+
+### Installation
+
+1. Clone the repository
 
 ```bash
-$ npm install
+git clone https://github.com/yourusername/tourism-booking-system.git
+cd tourism-booking-system/backend
 ```
 
-## Compile and run the project
+2. Install dependencies
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+npm install
+# or
+yarn install
 ```
 
-## Run tests
+3. Configure environment variables
 
 ```bash
-# unit tests
-$ npm run test
+# Create a .env file with the following variables
+cp .env.example .env
+# Edit .env with your configuration
+```
+
+4. Generate Prisma client
+
+```bash
+npx prisma generate
+```
+
+5. Apply database migrations
+
+```bash
+npx prisma migrate dev
+```
+
+6. Start the development server
+
+```bash
+npm run start:dev
+# or
+yarn start:dev
+```
+
+7. Access the API at `http://localhost:3000/api`
+8. Access Swagger documentation at `http://localhost:3000/api`
+
+## 🔧 Environment Variables
+
+Create a `.env` file in the root directory:
+
+```
+# Server Configuration
+PORT=3000
+NODE_ENV=development
+
+# Database Configuration (Prisma)
+DATABASE_URL="postgresql://username:password@localhost:5432/tourism_db?schema=public"
+# or MySQL: "mysql://username:password@localhost:3306/tourism_db"
+
+# Authentication
+JWT_SECRET=your_jwt_secret_key
+JWT_EXPIRATION=24h
+
+# Cloudinary Configuration
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_api_key
+CLOUDINARY_API_SECRET=your_api_secret
+
+# Optional: Email Service
+MAIL_HOST=smtp.example.com
+MAIL_USER=user@example.com
+MAIL_PASSWORD=password
+MAIL_FROM=noreply@tourism-booking.com
+```
+
+## 📁 Project Structure
+
+```
+├── prisma/                      # Prisma configuration
+│   ├── schema.prisma            # Database schema
+│   ├── migrations/              # Migration files
+│   └── seed.ts                  # Database seeding
+├── src/
+│   ├── main.ts                  # Application entry point
+│   ├── app.module.ts            # Root module
+│   ├── prisma/                  # Prisma service
+│   │   ├── prisma.module.ts
+│   │   └── prisma.service.ts
+│   ├── auth/                    # Authentication
+│   │   ├── auth.module.ts
+│   │   ├── auth.controller.ts
+│   │   ├── auth.service.ts
+│   │   ├── guards/
+│   │   └── strategies/
+│   ├── users/                   # User management
+│   │   ├── users.module.ts
+│   │   ├── users.controller.ts
+│   │   ├── users.service.ts
+│   │   └── dto/
+│   ├── tours/                   # Tours management
+│   │   ├── tours.module.ts
+│   │   ├── tours.controller.ts
+│   │   ├── tours.service.ts
+│   │   └── dto/
+│   ├── bookings/                # Booking management
+│   │   ├── bookings.module.ts
+│   │   ├── bookings.controller.ts
+│   │   ├── bookings.service.ts
+│   │   └── dto/
+│   ├── common/                  # Shared utilities
+│   │   ├── decorators/
+│   │   ├── filters/
+│   │   ├── guards/
+│   │   ├── interceptors/
+│   │   └── pipes/
+│   └── config/                  # Configuration
+│       ├── database.config.ts
+│       ├── jwt.config.ts
+│       └── cloudinary.config.ts
+├── test/                        # Test files
+├── .env                         # Environment variables (not committed)
+├── nest-cli.json                # Nest CLI configuration
+└── package.json                 # Project dependencies and scripts
+```
+
+## 📝 API Documentation
+
+The API documentation is automatically generated using Swagger. Access it by navigating to:
+`http://localhost:3000/api`
+
+## 🔄 Prisma Database Management
+
+```bash
+# Generate Prisma client
+npx prisma generate
+
+# Create a new migration
+npx prisma migrate dev --name name-of-migration
+
+# Apply pending migrations
+npx prisma migrate deploy
+
+# Reset database (CAUTION: This will delete all data)
+npx prisma migrate reset
+
+# View and edit data with Prisma Studio
+npx prisma studio
+
+# Seed the database
+npx prisma db seed
+```
+
+## 🧪 Testing
+
+```bash
+# Unit tests
+npm run test
 
 # e2e tests
-$ npm run test:e2e
+npm run test:e2e
 
-# test coverage
-$ npm run test:cov
+# Test coverage
+npm run test:cov
 ```
 
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+## 🚢 Deployment
 
 ```bash
-$ npm install -g mau
-$ mau deploy
+# Build the application
+npm run build
+
+# Start production server
+npm run start:prod
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+## 🛠️ Built With
 
-## Resources
+- [NestJS](https://nestjs.com/) - Progressive Node.js framework
+- [Prisma](https://prisma.io/) - Next-generation ORM for Node.js and TypeScript
+- [Passport](https://www.passportjs.org/) - Authentication middleware
+- [Swagger](https://swagger.io/) - API documentation
+- [Jest](https://jestjs.io/) - Testing framework
 
-Check out a few resources that may come in handy when working with NestJS:
+## 📝 License
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Support
+## 🤝 Contributing
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-## Stay in touch
+## 📞 Contact
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+Your Name - [@yourtwitter](https://twitter.com/yourtwitter) - email@example.com
 
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+Project Link: [https://github.com/yourusername/tourism-booking-system](https://github.com/yourusername/tourism-booking-system)
