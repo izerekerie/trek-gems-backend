@@ -35,8 +35,8 @@ RESTful API for the Tourism Booking System built with NestJS and Prisma ORM, pro
 1. Clone the repository
 
 ```bash
-git clone https://github.com/yourusername/tourism-booking-system.git
-cd tourism-booking-system/backend
+git clone https://github.com/izerekerie/trek-gems-backend.git
+cd trek-gems-backend
 ```
 
 2. Install dependencies
@@ -141,12 +141,7 @@ MAIL_FROM=noreply@tourism-booking.com
 │   │   ├── bookings.controller.ts
 │   │   ├── bookings.service.ts
 │   │   └── dto/
-│   ├── common/                  # Shared utilities
-│   │   ├── decorators/
-│   │   ├── filters/
-│   │   ├── guards/
-│   │   ├── interceptors/
-│   │   └── pipes/
+│  
 │   └── config/                  # Configuration
 │       ├── database.config.ts
 │       ├── jwt.config.ts
@@ -227,8 +222,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-## 📞 Contact
-
-Your Name - [@yourtwitter](https://twitter.com/yourtwitter) - email@example.com
-
-Project Link: [https://github.com/yourusername/tourism-booking-system](https://github.com/yourusername/tourism-booking-system)
