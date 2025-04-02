@@ -19,28 +19,7 @@ async function bootstrap() {
     .setDescription('the Trek Gems API description')
     .setVersion('1.0')
     .addTag('trek-gems')
-    .addBearerAuth(
-      {
-        type: 'http',
-        scheme: 'bearer',
-        bearerFormat: 'JWT',
-        name: 'JWT',
-        description: 'Enter JWT token',
-        in: 'header',
-      },
-      'access-token',
-    )
-    .addBearerAuth(
-      {
-        type: 'http',
-        scheme: 'bearer',
-        bearerFormat: 'JWT',
-        name: 'JWT',
-        description: 'Enter refresh token',
-        in: 'header',
-      },
-      'refresh-token',
-    )
+    .addBearerAuth()
 
     .build();
   const documentFactory = () => SwaggerModule.createDocument(app, config);
