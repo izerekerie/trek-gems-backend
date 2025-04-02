@@ -5,13 +5,7 @@ import { UploadApiResponse } from 'cloudinary';
 
 @Injectable()
 export class UploadService {
-  constructor(private readonly configService: ConfigService) {
-    cloudinary.config({
-      cloud_name: configService.get<string>('CLOUDINARY_CLOUD_NAME'),
-      api_key: configService.get<string>('CLOUDINARY_API_KEY'),
-      api_secret: configService.get<string>('CLOUDINARY_API_SECRET'),
-    });
-  }
+  constructor(private readonly configService: ConfigService) {}
 
   async uploadImages(files: Express.Multer.File[]): Promise<string[]> {
     if (!files || files.length === 0) {
