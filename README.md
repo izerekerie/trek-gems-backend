@@ -7,7 +7,7 @@
 
 RESTful API for the Tourism Booking System built with NestJS and Prisma ORM, providing endpoints for managing tours, bookings, users, and more.
 
-![Tourism Booking API](https://via.placeholder.com/800x400?text=Tourism+Booking+API)
+![Tourism Booking API](ek-gems-backend.onrender.com/api)
 
 ## ✨ Features
 
